@@ -39,7 +39,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.generateCodeController = void 0;
+exports.getCodeController = exports.generateCodeController = void 0;
 var generateCode_model_1 = require("../models/generateCode.model");
 var generateCode_helper_1 = __importDefault(require("../helpers/generateCode.helper"));
 var generateCodeController = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
@@ -65,9 +65,38 @@ var generateCodeController = function (req, res) { return __awaiter(void 0, void
                 return [3 /*break*/, 4];
             case 3:
                 err_1 = _a.sent();
-                throw new Error(err_1.message);
+                res.status(200).json({
+                    status: "failed",
+                });
+                return [3 /*break*/, 4];
             case 4: return [2 /*return*/];
         }
     });
 }); };
 exports.generateCodeController = generateCodeController;
+var getCodeController = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var codeArray, code, err_2;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, generateCode_model_1.GeneratedCodeModel.find()];
+            case 1:
+                codeArray = _a.sent();
+                code = codeArray[0];
+                res.status(200).json({
+                    status: "success",
+                    code: code.code,
+                });
+                return [3 /*break*/, 3];
+            case 2:
+                err_2 = _a.sent();
+                res.status(200).json({
+                    status: "failed",
+                });
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
+        }
+    });
+}); };
+exports.getCodeController = getCodeController;

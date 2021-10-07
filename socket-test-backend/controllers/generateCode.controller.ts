@@ -19,6 +19,24 @@ export const generateCodeController = async (req: Request, res: Response) => {
       code,
     });
   } catch (err) {
-    throw new Error((err as Error).message);
+    res.status(200).json({
+      status: "failed",
+    });
+  }
+};
+
+export const getCodeController = async (req: Request, res: Response) => {
+  try {
+    const codeArray = await GeneratedCodeModel.find();
+    const code = codeArray[0];
+
+    res.status(200).json({
+      status: "success",
+      code: code.code,
+    });
+  } catch (err) {
+    res.status(200).json({
+      status: "failed",
+    });
   }
 };
