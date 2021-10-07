@@ -1,0 +1,29 @@
+{
+  "name": "socket-test-backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "compile": "tsc --watch",
+    "watch": "nodemon ./dist/index.js",
+    "start": "concurrently \"yarn run compile\" \"yarn run watch\""
+  },
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "mongoose": "^6.0.9",
+    "morgan": "^1.10.0",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.12",
+    "@types/dotenv": "^8.2.0",
+    "@types/express": "^4.17.13",
+    "@types/morgan": "^1.9.3",
+    "@types/uuid": "^8.3.1",
+    "concurrently": "^6.3.0",
+    "cross-env": "^7.0.3",
+    "nodemon": "^2.0.13"
+  }
+}
