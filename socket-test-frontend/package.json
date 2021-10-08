@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@craco/craco": "^6.3.0",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
@@ -19,9 +20,9 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "cross-env PORT=3001 react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "cross-env PORT=3001 craco start",
+    "build": "craco build",
+    "test": "craco test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -44,6 +45,9 @@
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
-    "cross-env": "^7.0.3"
+    "autoprefixer": "^9",
+    "cross-env": "^7.0.3",
+    "postcss": "^7",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat"
   }
 }
