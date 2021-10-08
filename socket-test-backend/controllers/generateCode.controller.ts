@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { GeneratedCodeModel } from "../models/generateCode.model";
 import generateCode from "../helpers/generateCode.helper";
+import { io } from "..";
 
 export const generateCodeController = async (req: Request, res: Response) => {
   try {
@@ -13,6 +14,8 @@ export const generateCodeController = async (req: Request, res: Response) => {
     });
 
     await codeDoc.save();
+
+    io.emit("code:create");
 
     res.status(200).json({
       status: "success",

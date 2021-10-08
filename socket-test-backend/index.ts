@@ -8,14 +8,24 @@ import app from "./app";
 import connectToDB from "./db";
 
 const server = http.createServer(app);
-const io = new Server(server);
+export const io = new Server(server, {
+  cors: {
+    origin: true,
+    methods: ["GET", "POST"],
+  },
+  serveClient: false,
+});
 
 const PORT = process.env.PORT || 3000;
 
 connectToDB();
 
 io.on("connection", (socket) => {
-  console.log(socket.id);
+  console.log("Connected to socket");
+
+  io.on("disconnect", (socket) => {
+    console.log("disconnected");
+  });
 });
 
 server.listen(PORT, () => {

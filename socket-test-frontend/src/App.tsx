@@ -4,10 +4,9 @@ import { io } from "socket.io-client";
 
 import { getCode } from "./api/api";
 
-function App() {
+const App = () => {
   const [code, setCode] = useState<string>("");
-
-  const socket = io();
+  const ENDPOINT = "http://localhost:3000";
 
   useEffect(() => {
     (async () => {
@@ -16,16 +15,25 @@ function App() {
       code && setCode(code);
     })();
 
+    const socket = io(ENDPOINT);
+
     socket.on("connect", () => {
-      console.log(socket.connected);
+      console.log(socket.id);
+
+      socket.on("code:create", () => {
+        (async () => {
+          const { code } = await getCode();
+
+          code && setCode(code);
+        })();
+        console.log("New code created using web sockets.");
+      });
     });
 
-    socket.on("disconnect", () => {
-      console.log(socket.connected);
+    socket.on("connect_error", (err) => {
+      console.log("The connection to socket threw an error due to:", err);
     });
-
-    socket.connect();
-  }, [socket]);
+  }, []);
 
   return (
     <div className="App">
@@ -33,6 +41,6 @@ function App() {
       <h2 className="code">{code}</h2>
     </div>
   );
-}
+};
 
 export default App;

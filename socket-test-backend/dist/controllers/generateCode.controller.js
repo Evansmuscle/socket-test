@@ -42,6 +42,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getCodeController = exports.generateCodeController = void 0;
 var generateCode_model_1 = require("../models/generateCode.model");
 var generateCode_helper_1 = __importDefault(require("../helpers/generateCode.helper"));
+var __1 = require("..");
 var generateCodeController = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var code, codeDoc, err_1;
     return __generator(this, function (_a) {
@@ -58,6 +59,7 @@ var generateCodeController = function (req, res) { return __awaiter(void 0, void
                 return [4 /*yield*/, codeDoc.save()];
             case 2:
                 _a.sent();
+                __1.io.emit("code:create");
                 res.status(200).json({
                     status: "success",
                     code: code,
